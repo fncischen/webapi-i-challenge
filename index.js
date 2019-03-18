@@ -35,6 +35,13 @@ server.get('/api/users/:id', (req, res) => {
 });
 
 server.delete('/api/users/:id', (req, res) => {
+    if(!data.findById(req.body.id)) {
+        res.status(404).json({ message: "The user with the specified ID does not exist."})
+    }
+    else {
+        data.remove(req.body.id);
+        res.json({message: "The user has been deleted"});
+    }
 });
 
 server.put('/api/users/:id', (req, res) => {
