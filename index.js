@@ -1,6 +1,6 @@
 // implement your API here
 const express = require('express');
-const server = express(); // creates server for API calls :)
+const server = express().find("/data/db.js"); // creates server for API calls :)
 
 server.get('/api/users', (req, res) => {
     if(!req.body) {
