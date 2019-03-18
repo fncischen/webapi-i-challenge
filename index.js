@@ -1,13 +1,15 @@
 // implement your API here
 const express = require('express');
-const server = express().find("/data/db.js"); // creates server for API calls :)
+const data = require("/data/db.js").find('db');
+const server = express(); // creates server for API calls :)
 
 server.get('/api/users', (req, res) => {
     if(!req.body) {
         res.status(500).send("error: The users information could not be retrieved.")
     }
     else{
-        res.json(req.body);
+        const users = data.find();
+        res.json(users);
     }
 });
 
