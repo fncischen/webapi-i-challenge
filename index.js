@@ -19,7 +19,6 @@ server.post('/api/users', (req, res) => {
     }
     else{
        data.insert(req.body).status(201);
-       const newUser = data.find()
        res.json(req.body);
     }
 });
@@ -45,5 +44,13 @@ server.delete('/api/users/:id', (req, res) => {
 });
 
 server.put('/api/users/:id', (req, res) => {
+    if(!data.findById(req.body.id)) {
+        res.status(404).json({ message: "The user with the specified ID does not exist."})
+    }
+    else {
+        data.update(req.body.user.id, req.body.user);
+        const updatedUser = data.find(req.body.user.id);
+        res.json(updatedUser);
+    }
 });
 
