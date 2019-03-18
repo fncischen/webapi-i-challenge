@@ -18,16 +18,25 @@ server.post('/api/users', (req, res) => {
         res.status(400).send("errorMessage: Please provide name and bio for the user.")
     }
     else{
-       res.status(201).json()
+       data.insert(req.body).status(201);
+       const newUser = data.find()
+       res.json(req.body);
     }
 });
 
 server.get('/api/users/:id', (req, res) => {
+    if(!data.findById(req.body.id)) {
+        res.status(404).json({ message: "The user with the specified ID does not exist."})
+    }
+    else {
+        const retrievedUser = data.findById(req.body.id);
+        res.json(retrievedUser);
+    }
 });
 
 server.delete('/api/users/:id', (req, res) => {
 });
 
 server.put('/api/users/:id', (req, res) => {
-}
+});
 
